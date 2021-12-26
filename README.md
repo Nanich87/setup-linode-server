@@ -1,6 +1,7 @@
 # Setup Linode Server / Ubuntu 20.04
 
 `apt update`
+
 `apt upgrade`
 
 ## 1. Pi-Hole
