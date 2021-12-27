@@ -68,5 +68,7 @@
 `nano /etc/ssh/ssh_config`
 
 `ChallengeResponseAuthentication no`
+
 `PasswordAuthentication no`
+
 `UsePAM no`
