@@ -62,3 +62,11 @@
 
 `apt install certbot python3-certbot-nginx`
 `certbot --nginx`
+
+## Disable SSH Password Login
+
+`nano /etc/ssh/ssh_config`
+
+`ChallengeResponseAuthentication no`
+`PasswordAuthentication no`
+`UsePAM no`
