@@ -61,6 +61,7 @@
 ## Certbot
 
 `apt install certbot python3-certbot-nginx`
+
 `certbot --nginx`
 
 ## Disable SSH Password Login
