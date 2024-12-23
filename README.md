@@ -30,7 +30,11 @@
 
 ### Firewall
 
-`ufw allow 'Nginx Full`
+`ufw status`
+
+`ufw allow 'Nginx Full'`
+
+`ufw delete allow 'Nginx HTTP'`
 
 ## 4. PHP-FPM
 
@@ -64,6 +68,8 @@
 
 `certbot --nginx`
 
+`certbot --nginx -d example.com -d www.example.com`
+
 ## Disable SSH Password Login
 
 `nano /etc/ssh/ssh_config`
@@ -73,3 +79,29 @@
 `PasswordAuthentication no`
 
 `UsePAM no`
+
+## Nginx
+
+### Flask
+
+`nano /etc/nginx/sites-available/example.com`
+
+<pre>
+server {
+    listen 80;
+    server_name _;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000/;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix /;
+    }
+}
+</pre>
+
+`nginx -t`
+
+`systemctl reload nginx`
+
