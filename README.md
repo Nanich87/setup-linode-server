@@ -92,11 +92,22 @@ server {
     server_name _;
 
     location / {
-        proxy_pass http://127.0.0.1:8000/;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Prefix /;
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5000;
+    }
+
+    location /static/ {
+        alias <path-to-your-application>/static/;
+        expires 30d;
+    }
+
+    location /socket.io {
+        include proxy_params;
+        proxy_http_version 1.1;
+        proxy_buffering off;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_pass http://127.0.0.1:5000/socket.io;
     }
 }
 </pre>
