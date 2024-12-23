@@ -80,9 +80,9 @@
 
 `UsePAM no`
 
-## Nginx
+## Flask
 
-### Flask
+### Nginx
 
 `nano /etc/nginx/sites-available/example.com`
 
@@ -105,3 +105,28 @@ server {
 
 `systemctl reload nginx`
 
+### Systemd Service
+
+`nano /etc/systemd/system/flask.service`
+
+<pre>
+[Unit]
+Description=uWSGI instance to serve flask-app
+After=network.target
+
+[Service]
+User=user
+Group=www-data
+WorkingDirectory=/home/user/flask-app
+Environment="PATH=/home/user/flask-app/.venv/bin"
+ExecStart=python3 /home/user/flask-app/wsgi.py
+
+[Install]
+WantedBy=multi-user.target
+</pre>
+
+`systemctl start flask`
+
+`systemctl enable flask`
+
+`systemctl status flask`
