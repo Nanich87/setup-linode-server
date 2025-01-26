@@ -112,9 +112,19 @@ server {
 }
 </pre>
 
+#### Test changes and reload Nginx
+
 `nginx -t`
 
 `systemctl reload nginx`
+
+#### Enable site
+
+`ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/`
+
+#### Permissions
+
+`chown -R www-data:www-data /var/www/html/example.com`
 
 ### Systemd Service
 
